@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using DisneyCafe.Data;
 
 namespace DisneyCafe.Models.Database
 {
@@ -23,7 +24,17 @@ namespace DisneyCafe.Models.Database
         /// and those would be saved here linked with the account
         /// </summary>
         [Required]
-        public string ConfirmationCode { get; set; }
+        public string OrderNumber 
+        {
+            get
+            {
+                return GenerateCode.GenerateOrderNumber(12);
+            }
+            set
+            {
+                OrderNumber = value;
+            }
+        }
 
         /// <summary>
         /// Reference Key to Customer / AspNetUsers 
