@@ -28,7 +28,7 @@ namespace DisneyCafe.Models.Database
         {
             get
             {
-                return GenerateCode.GenerateOrderNumber(12);
+                return GenerateCode.GenerateOrderNumber();
             }
             set
             {
