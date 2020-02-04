@@ -54,6 +54,7 @@ body {
     /* Margin bottom by footer height */
     margin-bottom: 60px;
     background-color: #C3C8CD;
+    font-family: 'Poppins', sans-serif;
 }
 .footer {
   position: absolute;
@@ -61,4 +62,31 @@ body {
   width: 100%;
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
+}
+
+.account {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+input {
+    text-align: center;
+}
+
+.btn {
+    background-color: #00FFFF;
+    border-radius: 1em;
+    padding-left: 2.5em;
+    padding-right: 2.5em;
+    color: black;
+    transition: 0.75s;
+}
+
+.btn:hover {
+    color: white;
+}
+
+.form-control {
+    border-radius: 1em;
 }
