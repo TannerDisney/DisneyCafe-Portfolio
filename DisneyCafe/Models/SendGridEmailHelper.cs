@@ -14,7 +14,7 @@ namespace DisneyCafe.Models
         {
             var apiKey = config.GetSection("SendGridApiKey").Value;
             var client = new SendGridClient(apiKey);
-            var doNotReplyEmail = new EmailAddress("change@gmail.com");
+            var doNotReplyEmail = new EmailAddress("INSERT DO NOT REPLY EMAIL");
             EmailAddress recipient = new EmailAddress(emailAddress);
             var htmlContent = $"<strong>DisneyCafe Inc.</strong><br><p>{body}</p>";
             var msg = MailHelper.CreateSingleEmail(doNotReplyEmail, recipient, subject, body, htmlContent);
