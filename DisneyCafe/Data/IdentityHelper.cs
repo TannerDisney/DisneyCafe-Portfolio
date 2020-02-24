@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using DisneyCafe.Models.Database;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -25,6 +26,44 @@ namespace DisneyCafe.Data
                 {
                     roleResult = await roleManager.CreateAsync(new IdentityRole(role));
                 }
+            }
+        }
+
+        internal static async Task SeedRoles(IServiceProvider provider, string adminrole, string ownerrole)
+        {
+            // Administrator Credentials
+            string administratorEmail = "disneycafeadmin@disneycafe.online";
+            string administratorPassword = "Cptc@2020";
+
+            // Owner Credentials
+            string ownerEmail = "disneycafeowner@disneycafe.online";
+            string ownerPassword = "Cptc@2020";
+
+            var userManager = provider.GetRequiredService<UserManager<IdentityUser>>();
+
+            // If no users are in the database, create admin and owner accounts
+            if (userManager.Users.Count() == 0)
+            {
+                // Create Admin User
+                IdentityUser adminUser = new IdentityUser()
+                {
+                    Email = administratorEmail,
+                    UserName = administratorEmail
+                };
+
+                // Create Owner User
+                IdentityUser ownerUser = new IdentityUser()
+                {
+                    Email = ownerEmail,
+                    UserName = ownerEmail
+                };
+
+                // Create and Add Admin account
+                await userManager.CreateAsync(adminUser, administratorPassword);
+                await userManager.AddToRoleAsync(adminUser, adminrole);
+
+                await userManager.CreateAsync(ownerUser, ownerPassword);
+                await userManager.AddToRoleAsync(ownerUser, ownerrole);
             }
         }
 
