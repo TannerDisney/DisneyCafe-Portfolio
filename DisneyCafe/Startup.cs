@@ -30,7 +30,7 @@ namespace DisneyCafe
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
@@ -77,6 +77,8 @@ namespace DisneyCafe
             };
 
             IdentityHelper.CreateRoles(serviceProvider.ServiceProvider, allRoles).Wait();
+            // creates Administrator role and Owner role for the website
+            IdentityHelper.SeedRoles(serviceProvider.ServiceProvider, IdentityHelper.Administrator, IdentityHelper.Owner).Wait();
         }
     }
 }
