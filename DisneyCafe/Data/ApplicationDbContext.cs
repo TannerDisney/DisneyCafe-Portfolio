@@ -14,5 +14,8 @@ namespace DisneyCafe.Data
         {
         }
         public DbSet<Ingredients> Ingredients { get; set; }
+        public DbSet<Desserts> Desserts { get; set; }
+        public DbSet<Orders> Orders { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
     }
 }
