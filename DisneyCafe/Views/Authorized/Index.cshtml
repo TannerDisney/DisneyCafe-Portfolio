@@ -1,0 +1,54 @@
+﻿@model IEnumerable<DisneyCafe.Models.Database.Desserts>
+@using DisneyCafe.Models.Database;
+
+@{
+    ViewData["Title"] = "Desserts Listing";
+}
+
+<h1>
+    Desserts
+</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stock)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (Desserts d in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => d.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => d.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => d.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => d.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => d.Stock)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
