@@ -24,20 +24,24 @@ namespace DisneyCafe.Controllers
             return View(desserts);
         }
 
-        public IActionResult OrderForm()
+        public async Task<IActionResult> OrderForm(int id)
         {
-            return View();
+            Desserts dessert = await DessertsDb.GetDessertsById(_context, id);
+            return View(dessert);
         }
 
-        public async Task<IActionResult> OrderForm(Desserts dessert)
+        [HttpPost]
+        public async Task<IActionResult> OrderForm(Desserts d)
         {
             if (ModelState.IsValid)
             {
+                await DessertsDb.UpdateDessertAsync(_context, d);
                 TempData["WasSuccessful"] = "You have successfully ordered items for DisneyCafe";
                 return RedirectToAction("Index", "Home");
             }
 
-            return View(dessert);
+            return View(d);
         }
+
     }
 }

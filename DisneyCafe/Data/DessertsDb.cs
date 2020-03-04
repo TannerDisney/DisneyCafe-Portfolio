@@ -16,5 +16,20 @@ namespace DisneyCafe.Data
                        select d).ToListAsync();
             return desserts;
         }
+
+        public static async Task<Desserts> GetDessertsById(ApplicationDbContext context, int id)
+        {
+            Desserts dessert =
+                await (from d in context.Desserts
+                       where d.Id == id
+                       select d).SingleOrDefaultAsync();
+            return dessert;
+        }
+
+        public static async Task UpdateDessertAsync(ApplicationDbContext context, Desserts dessert)
+        {
+            context.Update(dessert);
+            await context.SaveChangesAsync();
+        }
     }
 }
