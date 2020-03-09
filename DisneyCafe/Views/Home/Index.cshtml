@@ -1,5 +1,9 @@
-﻿@{
+﻿@using DisneyCafe.Data
+@using DisneyCafe.Models.Database
+@inject ApplicationDbContext context
+@{
     ViewData["Title"] = "Home Page";
+    List<Desserts> desserts = await DessertsDb.GetDessertsAsync(context);
 }
 
 @if (TempData["WasSuccessful"] != null)
@@ -9,5 +13,22 @@
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
+    </div>
+}
+
+@if (desserts.Count != 0)
+{
+    Random rand = new Random();
+    int index = rand.Next(desserts.Count);
+    string dessertName = desserts[index].Title;
+    string dessertDesc = desserts[index].Description;
+
+    <div class="card text-center" style="width: 15rem;">
+        <img class="card-img-top" src="~/images/GlowDisneyCafe.png" alt="dessert-image" />
+        <div class="card-body">
+            <h5 class="card-title">Try our @dessertName!</h5>
+            <p class="card-text">@dessertDesc</p>
+            <a href="#" class="btn">Order Dessert</a>
+        </div>
     </div>
 }
