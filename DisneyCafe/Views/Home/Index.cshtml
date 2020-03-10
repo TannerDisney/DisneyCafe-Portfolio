@@ -26,35 +26,22 @@
             int index = rand.Next(desserts.Count);
             string dessertName = desserts[index].Title;
             string dessertDesc = desserts[index].Description;
-
-
+            string[] dessertImages = 
+            {
+                "lemon-mpie.jpg",
+                "cheesecake.jpg",
+                "ube-roll.png",
+                "chocolate-cake-pop.jpg"
+            };
+            var imageLink = "images/" + dessertImages[index];
             <div class="card text-center mx-auto" style="width: 20rem;">
-                @if (index == 0)
-                {
-                    <img src="~/images/lemon-mpie.jpg" class="card-img-top" alt="Lemon meringue pie" style="max-height:150px;" />
-                }
-                else if (index == 1)
-                {
-                    <img src="~/images/cheesecake.jpg" class="card-img-top" alt="Cheesecake" />
-                }
-                else if (index == 2)
-                {
-                    <img src="~/images/ube-roll.png" class="card-img-top" alt="Cartoon Ube Roll" />
-                }
-                else if (index == 3)
-                {
-                    <img src="~/images/chocolate-cake-pop.jpg" class="card-img-top" alt="Chocolate Cake Pop" />
-                }
-                else
-                {
-                    <img src="~/images/GlowDisneyCafe.png" class="card-img-top" alt="Image cannot be found" />
-                }
+                <img src="@imageLink" class="card-img-top" alt="@dessertName" />
                 <div class="card-body">
                     <h5 class="card-title">Try our @dessertName!</h5>
                     <p class="card-text">@dessertDesc</p>
                     <a href="#" class="btn">Order Dessert</a>
                 </div>
-    </div>
-}
-</p>
+            </div>
+        }
+    </p>
 </div>
