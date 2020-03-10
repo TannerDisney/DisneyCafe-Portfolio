@@ -90,3 +90,12 @@ input {
 .form-control {
     border-radius: 1em;
 }
+
+.nav-container {
+    height:100px;
+}
+
+.disneycafe-brand {
+    max-width: 150px;
+    max-height: 150px;
+}
