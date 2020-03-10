@@ -15,20 +15,46 @@
         </button>
     </div>
 }
+<div class="jumbotron text-center">
+    <h3 class="display-4">Welcome to DisneyCafe</h3>
+    <p class="lead">Where we sell an assortment of desserts at excellent prices!</p>
+    <hr class="my-4" />
+    <p class="lead">
+        @if (desserts.Count != 0)
+        {
+            Random rand = new Random();
+            int index = rand.Next(desserts.Count);
+            string dessertName = desserts[index].Title;
+            string dessertDesc = desserts[index].Description;
 
-@if (desserts.Count != 0)
-{
-    Random rand = new Random();
-    int index = rand.Next(desserts.Count);
-    string dessertName = desserts[index].Title;
-    string dessertDesc = desserts[index].Description;
 
-    <div class="card text-center" style="width: 15rem;">
-        <img class="card-img-top" src="~/images/GlowDisneyCafe.png" alt="dessert-image" />
-        <div class="card-body">
-            <h5 class="card-title">Try our @dessertName!</h5>
-            <p class="card-text">@dessertDesc</p>
-            <a href="#" class="btn">Order Dessert</a>
-        </div>
+            <div class="card text-center mx-auto" style="width: 20rem;">
+                @if (index == 0)
+                {
+                    <img src="~/images/lemon-mpie.jpg" class="card-img-top" alt="Lemon meringue pie" style="max-height:150px;" />
+                }
+                else if (index == 1)
+                {
+                    <img src="~/images/cheesecake.jpg" class="card-img-top" alt="Cheesecake" />
+                }
+                else if (index == 2)
+                {
+                    <img src="~/images/ube-roll.png" class="card-img-top" alt="Cartoon Ube Roll" />
+                }
+                else if (index == 3)
+                {
+                    <img src="~/images/chocolate-cake-pop.jpg" class="card-img-top" alt="Chocolate Cake Pop" />
+                }
+                else
+                {
+                    <img src="~/images/GlowDisneyCafe.png" class="card-img-top" alt="Image cannot be found" />
+                }
+                <div class="card-body">
+                    <h5 class="card-title">Try our @dessertName!</h5>
+                    <p class="card-text">@dessertDesc</p>
+                    <a href="#" class="btn">Order Dessert</a>
+                </div>
     </div>
 }
+</p>
+</div>
