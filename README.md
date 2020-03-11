@@ -1,5 +1,5 @@
 ### Github Action Badges
-
+![DisneyCafe CI](https://github.com/TannerDisney/DisneyCafe-Portfolio/workflows/.NET%20Core/badge.svg)
 
 # DisneyCafe-Portfolio
 This website application will be able to have an order form for customers to be able to order food and have it made and delivered/ carry-out. 
