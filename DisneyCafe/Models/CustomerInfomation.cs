@@ -30,7 +30,7 @@ namespace DisneyCafe.Models
         /// </summary>
         [Required]
         [Display(Name = "Legal Last Name")]
-        public string LastName { get; set }
+        public string LastName { get; set; }
 
         /// <summary>
         /// Customer shipping/mailing address

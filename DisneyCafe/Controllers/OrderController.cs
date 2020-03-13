@@ -17,7 +17,7 @@ namespace DisneyCafe.Controllers
         }
         public async Task<IActionResult> Catalog()
         {
-            List<Desserts> desserts = await DessertsDb.GetDesertsAsync(_context);
+            List<Desserts> desserts = await DessertsDb.GetDessertsAsync(_context);
             return View(desserts);
         }
     }
