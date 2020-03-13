@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@inject Microsoft.AspNetCore.Http.IHttpContextAccessor sessionData
+@using Microsoft.AspNetCore.Http
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -44,6 +47,21 @@
         </nav>
     </header>
     <div class="container">
+        <a asp-controller="Cart" asp-action="Checkout" class="text-dark">
+            <span class="fas fa-shopping-cart">
+                @{ 
+                    int total = CartHelper.GetDessertCount(sessionData);
+                }
+                @if (total == 0)
+                {
+                    <text>Empty</text>
+                }
+                else
+                { 
+                    @total
+                }
+            </span>
+        </a>
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
