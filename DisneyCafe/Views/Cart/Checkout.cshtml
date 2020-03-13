@@ -1,24 +1,19 @@
 ﻿@model IEnumerable<DisneyCafe.Models.Database.Desserts>
 
 @{
-    ViewData["Title"] = "Catalog";
+    ViewData["Title"] = "Checkout";
 }
+
 <style>
     th, td {
-        padding:0.75em;
+        padding: 0.75em;
     }
 </style>
-<h3 class="text-center">Viewing our desserts</h3>
+<h3 class="text-center">In your cart</h3>
 
 <table class="table-dark">
     <thead class="table-bordered">
         <tr>
-            @if (User.IsInRole("Administrator") || User.IsInRole("Owner"))
-            {
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            }
             <th>
                 @Html.DisplayNameFor(model => model.Title)
             </th>
@@ -33,23 +28,14 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            @if (User.IsInRole("Administrator") || User.IsInRole("Owner"))
-            {
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            }
             <td>
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
-            <td>
+            <td colspan="2">
                 @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                <a asp-action="Add" asp-controller="Cart" asp-route-id="@item.Id" class="btn">Add To Cart</a>
             </td>
         </tr>
 }

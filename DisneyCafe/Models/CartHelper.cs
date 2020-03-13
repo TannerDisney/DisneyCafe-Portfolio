@@ -20,9 +20,7 @@ namespace DisneyCafe.Models
             {
                 return new List<Desserts>();
             }
-
-            List<Desserts> desserts =
-                JsonConvert.DeserializeObject<List<Desserts>>(data);
+            List<Desserts> desserts = JsonConvert.DeserializeObject<List<Desserts>>(data);
             return desserts;
         }
 
@@ -36,7 +34,7 @@ namespace DisneyCafe.Models
         {
             List<Desserts> desserts = GetDesserts(accessor);
             desserts.Add(dessert);
-            string data = JsonConvert.SerializeObject(dessert);
+            string data = JsonConvert.SerializeObject(desserts);
 
             accessor.HttpContext.Response.Cookies.Append(CartCookie, data);
         }
