@@ -5,16 +5,20 @@ using System.Threading.Tasks;
 using DisneyCafe.Data;
 using DisneyCafe.Models;
 using DisneyCafe.Models.Database;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace DisneyCafe.Controllers
 {
     public class OrderController : Controller
     {
         private readonly ApplicationDbContext _context;
-        public OrderController(ApplicationDbContext context)
+        private readonly IHttpContextAccessor _accessor;
+        public OrderController(ApplicationDbContext context, IHttpContextAccessor accessor)
         {
             _context = context;
+            _accessor = accessor;
         }
         public async Task<IActionResult> Catalog()
         {
@@ -30,8 +34,10 @@ namespace DisneyCafe.Controllers
         [HttpPost]
         public async Task<IActionResult> CustomerInfo(CustomerInfomation info)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
+                Console.WriteLine("Completed");
+                await OrderDb.CompleteOrder(_context, _accessor, info, HttpContext.User.Identity.Name);
                 return RedirectToAction("Index", "Home");
             }
             return View(info);

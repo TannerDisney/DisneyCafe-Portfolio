@@ -24,17 +24,7 @@ namespace DisneyCafe.Models.Database
         /// and those would be saved here linked with the account
         /// </summary>
         [Required]
-        public string OrderNumber 
-        {
-            get
-            {
-                return GenerateCode.GenerateOrderNumber();
-            }
-            set
-            {
-                OrderNumber = value;
-            }
-        }
+        public string OrderNumber { get; set; }
 
         /// <summary>
         /// The application user the order belongs to
@@ -44,5 +34,6 @@ namespace DisneyCafe.Models.Database
         /// All desserts ordered by the user
         /// </summary>
         public List<Desserts> Desserts { get; set; }
+        public CustomerInfomation? CustomerInfomation { get; set; }
     }
 }
