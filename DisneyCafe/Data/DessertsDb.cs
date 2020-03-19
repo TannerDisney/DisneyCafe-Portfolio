@@ -13,7 +13,7 @@ namespace DisneyCafe.Data
         {
             List<Desserts> desserts =
                 await (from d in context.Desserts
-                       select d).ToListAsync();
+                       select d).AsNoTracking().ToListAsync();
             return desserts;
         }
 
@@ -22,7 +22,7 @@ namespace DisneyCafe.Data
             Desserts dessert =
                 await (from d in context.Desserts
                        where d.Id == id
-                       select d).SingleOrDefaultAsync();
+                       select d).AsNoTracking().SingleOrDefaultAsync();
             return dessert;
         }
 

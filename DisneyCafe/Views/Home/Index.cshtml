@@ -39,7 +39,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Try our @dessertName!</h5>
                     <p class="card-text">@dessertDesc</p>
-                    <a href="#" class="btn">Order Dessert</a>
+                    <a asp-action="Add" asp-controller="Cart" asp-route-id="@desserts[index].Id" class="btn">Order Dessert</a>
                 </div>
             </div>
         }
