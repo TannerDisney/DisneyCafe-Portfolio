@@ -5,23 +5,21 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace DisneyCafe.Data
 {
     public static class OrderDb
     {
-        public static async Task CompleteOrder(ApplicationDbContext context, IHttpContextAccessor accessor, CustomerInfomation info, string username)
+        public static async Task CompleteOrder(ApplicationDbContext context, CustomerInfomation info, ApplicationUser user)
         {
-            ApplicationUser user = new ApplicationUser()
-            { Email = username };
-            List<Desserts> desserts = CartHelper.GetDesserts(accessor);
             Orders order = new Orders()
             {
                 OrderNumber = GenerateCode.GenerateOrderNumber(),
                 User = user,
-                Desserts = desserts,
                 CustomerInfomation = info
             };
+            context.Entry(user).State = EntityState.Detached;
             await context.AddAsync(order);
             await context.SaveChangesAsync();
         }

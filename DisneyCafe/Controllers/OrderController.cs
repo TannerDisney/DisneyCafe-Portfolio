@@ -6,6 +6,7 @@ using DisneyCafe.Data;
 using DisneyCafe.Models;
 using DisneyCafe.Models.Database;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,10 +16,12 @@ namespace DisneyCafe.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly IHttpContextAccessor _accessor;
-        public OrderController(ApplicationDbContext context, IHttpContextAccessor accessor)
+        private readonly UserManager<IdentityUser> _userManager;
+        public OrderController(ApplicationDbContext context, IHttpContextAccessor accessor, UserManager<IdentityUser> userManager)
         {
             _context = context;
             _accessor = accessor;
+            _userManager = userManager;
         }
         public async Task<IActionResult> Catalog()
         {
@@ -34,10 +37,18 @@ namespace DisneyCafe.Controllers
         [HttpPost]
         public async Task<IActionResult> CustomerInfo(CustomerInfomation info)
         {
+            var uSearch = await _userManager.GetUserAsync(HttpContext.User);
+            ApplicationUser user = new ApplicationUser()
+            { 
+                Id = uSearch.Id,
+                Email = uSearch.Email,
+                UserName = uSearch.UserName
+            };
             if (!ModelState.IsValid)
             {
                 Console.WriteLine("Completed");
-                await OrderDb.CompleteOrder(_context, _accessor, info, HttpContext.User.Identity.Name);
+                await OrderDb.CompleteOrder(_context, info, user);
+                CartHelper.ClearCookie(_accessor);
                 return RedirectToAction("Index", "Home");
             }
             return View(info);

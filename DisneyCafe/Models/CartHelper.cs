@@ -38,5 +38,15 @@ namespace DisneyCafe.Models
 
             accessor.HttpContext.Response.Cookies.Append(CartCookie, data);
         }
+
+        public static string GetCookie()
+        {
+            return CartCookie;
+        }
+
+        public static void ClearCookie(IHttpContextAccessor accessor)
+        {
+            accessor.HttpContext.Response.Cookies.Delete(CartCookie);
+        }
     }
 }

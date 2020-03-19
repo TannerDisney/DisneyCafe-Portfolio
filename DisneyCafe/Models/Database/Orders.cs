@@ -29,11 +29,12 @@ namespace DisneyCafe.Models.Database
         /// <summary>
         /// The application user the order belongs to
         /// </summary>
+        [NotMapped]
         public ApplicationUser User { get; set; }
         /// <summary>
         /// All desserts ordered by the user
         /// </summary>
-        public List<Desserts> Desserts { get; set; }
-        public CustomerInfomation? CustomerInfomation { get; set; }
+        [NotMapped]
+        public CustomerInfomation CustomerInfomation { get; set; }
     }
 }
